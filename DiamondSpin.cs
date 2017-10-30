@@ -11,7 +11,6 @@ public class DiamondSpin : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print("hello?");
-        transform.Rotate(Vector3.up, 7 * Time.deltaTime);
+        transform.Rotate(0, 3, 0, Space.World);
     }
 }

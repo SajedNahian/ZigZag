@@ -5,9 +5,13 @@ using UnityEngine;
 public class TriggerChecker : MonoBehaviour {
 
     Rigidbody rb;
+    public static bool gameOver;
+
 	// Use this for initialization
 	void Awake () {
+        gameOver = false;
         rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll;
 	}
 	
 	// Update is called once per frame
@@ -15,12 +19,15 @@ public class TriggerChecker : MonoBehaviour {
 		
 	}
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Ball")
+        if (!gameOver)
         {
-            Invoke("FallDown", .2f);
-            //FallDown();
+            if (other.gameObject.tag == "Ball")
+            {
+                Invoke("FallDown", .4f);
+                //FallDown();
+            }
         }
     }
 

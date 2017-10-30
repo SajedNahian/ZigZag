@@ -16,7 +16,7 @@ public class PlatformSpawner : MonoBehaviour {
         size = platformPrefab.transform.localScale.x;
         lastPos = transform.position;
 
-        for (int i = 0; i < 40; i ++)
+        for (int i = 0; i < 50; i ++)
         {
             SpawnPlatform();
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BallController : MonoBehaviour {
+    public GameObject particle;
     [SerializeField]
     private float speed;
     private bool gameStarted, gameOver;
@@ -39,6 +40,7 @@ public class BallController : MonoBehaviour {
             rb.constraints = RigidbodyConstraints.None;
             rb.velocity = new Vector3(0, -18f, 0);
             PlatformSpawner.gameOver = true;
+            TriggerChecker.gameOver = true;
             Camera.main.GetComponent<CameraFollow>().gameOver = true;
         }
 	}
@@ -51,6 +53,17 @@ public class BallController : MonoBehaviour {
         } else
         {
             rb.velocity = new Vector3(0, 0, speed);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Diamond")
+        {
+            GameObject par = Instantiate(particle, other.transform.position, Quaternion.identity) as GameObject;
+            Destroy(other.gameObject);
+            Destroy(par, 1f);
+            
         }
     }
 }
